@@ -72,7 +72,11 @@ images.forEach((image) => {
   const galleryLinkHTML = document.createElement('a');
   galleryLinkHTML.className = 'gallery-link';
   galleryLinkHTML.href = '#'; 
-  galleryLinkHTML.dataset.source = image.original;
+  galleryLinkHTML.dataset.source = image.preview;
+
+  const bigImageLinkHTML = document.createElement('a');
+bigImageLinkHTML.href = image.original;
+bigImageLinkHTML.target = '_blank'; 
 
   const galleryImageHTML = document.createElement('img');
   galleryImageHTML.className = 'gallery-image';
@@ -82,4 +86,15 @@ images.forEach((image) => {
   galleryLinkHTML.appendChild(galleryImageHTML);
   galleryItemHTML.appendChild(galleryLinkHTML);
   galleryHTML.appendChild(galleryItemHTML);
+  galleryItemHTML.appendChild(bigImageLinkHTML);
+  
 });
+galleryHTML.addEventListener('click', (event) => {
+    const target = event.target;
+    if (target.tagName === 'A' && target.dataset.source) {
+      const bigImageLink = document.createElement('a');
+      bigImageLink.href = target.dataset.source;
+      bigImageLink.target = '_blank'; 
+      console.log(bigImageLink);
+    }
+  });
