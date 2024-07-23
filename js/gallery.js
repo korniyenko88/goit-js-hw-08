@@ -81,8 +81,8 @@ images.forEach((img) => {
   galleryImage.alt = img.description;
   galleryImage.dataset.source = img.original;
   galleryLink.addEventListener("click", (event) => {
-    event.preventDefault(); // prevent default link behavior
-    console.log(`Opening large image: ${galleryLink.href}`);
+    event.preventDefault();
+    console.log(`Opening link : ${galleryLink.href}`);
   });
 
   galleryLink.appendChild(galleryImage);
