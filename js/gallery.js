@@ -101,10 +101,11 @@ const galleryCardClick = (event) => {
   const modalInstance = basicLightbox.create(`
     <a class="gallery-link" href="${cardDescription.original}">
       <img
-        class="gallery-image"
+        class="modal-gallery-image"
         src="${cardDescription.original}"
         data-source="${cardDescription.original}"
         alt="${cardDescription.description}"
+        
       />
     </a>
   `);
@@ -113,10 +114,4 @@ const galleryCardClick = (event) => {
 };
 imagesCardEl.addEventListener("click", galleryCardClick);
 
-// const instance = basicLightbox.create(`
-// 	<h1>Dynamic Content</h1>
-// 	<p>You can set the content of the lightbox with JS.</p>
-//   <button type="button">cleck me!!!</button>
-// `)
-// console.log(instance);
-// instance.show(() => console.log('Modal is open'));
+

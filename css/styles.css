@@ -1,5 +1,8 @@
 body {
-    width: 1440px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1440px;
 }
 .gallery {
   list-style: none;
@@ -15,4 +18,12 @@ body {
 .gallery-image {
   width: 360px;
   height: 200px;
+  transition: transform 0.5s ease-in-out;
+}
+.modal-gallery-image {
+  width: 1112px;
+  height: 640px;
+}
+.gallery-image:hover {
+  transform: scale(1.1);
 }
