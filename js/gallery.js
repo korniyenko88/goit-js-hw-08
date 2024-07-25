@@ -63,29 +63,60 @@ const images = [
     description: "Lighthouse Coast Sea",
   },
 ];
+const createGalleryCardTemplate = (image) => {
+  return `
+  <li class="gallery-item" data-id = "${image.description}">
+  <a class="gallery-link" href="${image.original}">
+    <img
+      class="gallery-image"
+      src="${image.preview}"
+      data-source="${image.original}"
+      alt="${image.description}"
+    />
+  </a>
+</li>
+  `;
+};
 
-const gallery = document.querySelector(".gallery");
+const galleryCardTemplate = images
+  .map((gallleryInfo) => createGalleryCardTemplate(gallleryInfo))
+  .join("");
 
-images.forEach((img) => {
-  const galleryItem = document.createElement("li");
-  galleryItem.classList.add("gallery-item");
+const imagesCardEl = document.querySelector(".gallery");
 
-  const galleryLink = document.createElement("a");
-  galleryLink.href = img.original;
-  galleryLink.target = "_blank";
+imagesCardEl.innerHTML = galleryCardTemplate;
 
-  const galleryImage = document.createElement("img");
-  galleryImage.classList.add("gallery-image");
+const galleryCardClick = (event) => {
+  if (event.target === event.currentTarget) {
+    return;
+  }
+  event.preventDefault();
 
-  galleryImage.src = img.preview;
-  galleryImage.alt = img.description;
-  galleryImage.dataset.source = img.original;
-  galleryLink.addEventListener("click", (event) => {
-    event.preventDefault();
-    console.log(`Opening link : ${galleryLink.href}`);
-  });
+  const imageCard = event.target.closest(".gallery-item");
+  const imageCardDescription = imageCard.dataset.id;
+  const cardDescription = images.find(
+    (image) => image.description === imageCardDescription
+  );
 
-  galleryLink.appendChild(galleryImage);
-  galleryItem.appendChild(galleryLink);
-  gallery.appendChild(galleryItem);
-});
+  const modalInstance = basicLightbox.create(`
+    <a class="gallery-link" href="${cardDescription.original}">
+      <img
+        class="gallery-image"
+        src="${cardDescription.original}"
+        data-source="${cardDescription.original}"
+        alt="${cardDescription.description}"
+      />
+    </a>
+  `);
+
+  modalInstance.show();
+};
+imagesCardEl.addEventListener("click", galleryCardClick);
+
+// const instance = basicLightbox.create(`
+// 	<h1>Dynamic Content</h1>
+// 	<p>You can set the content of the lightbox with JS.</p>
+//   <button type="button">cleck me!!!</button>
+// `)
+// console.log(instance);
+// instance.show(() => console.log('Modal is open'));
